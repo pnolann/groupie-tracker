@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Liste des Artistes</title>
+    <link rel="stylesheet" href="/static/css/artistStyles.css">
+</head>
+<body>
+<div class="header">
+    <div class="title">
+        <h1>Tracker de tigres</h1>
+    </div>
+    <a href="/">Accueil </a>
+</div>
+<div class="artist-container">
+    {{ range . }}
+    <div class="artist-card">
+        <img src="{{ .Image }}" alt="Image de {{ .Name }}">
+        <h2>{{ .Name }}</h2>
+        <p>Création : {{ .CreatedDate }}</p>
+        <p>Premier Album : {{ .FirstAlbum }}</p>
+    </div>
+    {{ end }}
+</div>
+</body>
+</html>
