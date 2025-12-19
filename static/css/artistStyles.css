@@ -1,0 +1,138 @@
+body {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1; /* Toujours derrière le texte */
+
+    /* L'image de fond */
+    background-image: 
+        linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), /* Voile léger pour garder le texte lisible */
+        url('/static/img/artists-background.png');
+    
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
+    /* --- LA SATURATION --- */
+    /* 100% = normal, 0% = noir et blanc, 200%+ = très vif */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+}
