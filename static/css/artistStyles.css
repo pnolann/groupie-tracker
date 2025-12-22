@@ -1,138 +1,115 @@
 body {
+    font-family: "Archivo Black", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+
+    margin: 0;
+    position: relative;
+    min-height: 100vh;
+    background-color: #000000;
+}
+
+.img-logo {
+    width: 100px;
+    height: auto;
+}
+
+body::before {
     content: "";
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    z-index: -1; /* Toujours derrière le texte */
+    z-index: -1;
 
-    /* L'image de fond */
-    background-image: 
-        linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), /* Voile léger pour garder le texte lisible */
-        url('/static/img/artists-background.png');
-    
-    background-size: cover;
-    background-position: center;
+    background-image: url('../img/artists-background.png');
     background-repeat: no-repeat;
-
-    /* --- LA SATURATION --- */
-    /* 100% = normal, 0% = noir et blanc, 200%+ = très vif */
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    background-position: center;
+    background-size: cover;
+
+    opacity: 0.3;
+    filter: blur(8px);
+}
+
+
+.header {
+    position: sticky;
+    z-index: 1000;
+    background: linear-gradient(90deg, #cc6d0d 0%, #e65100 100%);
+    color: #fff;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1em 2em;
+    border-bottom: 4px solid #000;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+    text-transform: uppercase;
+    opacity: 0.9;
+}
+
+
+
+
+
+.artist-container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 40px;
+    padding: 40px;
+}
+
+.artist-card {
+    position: relative;
+    text-align: center;
+    color: #ffffff;
+}
+
+.artist-card::before {
+    content: "";
+    display: block;
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    background: #000000b0;
+
+    -webkit-mask-image: url("../img/test.svg");
+    -webkit-mask-size: contain;
+    -webkit-mask-repeat: no-repeat;
+    -webkit-mask-position: center;
+
+    mask-image: url("../img/test.svg");
+    mask-size: contain;
+    mask-repeat: no-repeat;
+    mask-position: center;
+}
+
+.artist-card img {
+    width: 250px;
+    height: 250px;
+    border-radius: 50%;
+    object-fit: cover;
+    position: absolute;
+    top: 15%;
+    left: 50%;
+    transform: translateX(-50%);
+    border: 3px solid #f7931e;
+    z-index: 2;
+}
+
+.artist-card h2,
+.artist-card p {
+    position: relative;
+    z-index: 3;
+}
+
+.artist-card h2 {
+    margin-top: 15px;
+    font-size: 1.2rem;
+    color: #f7931e;
+}
+
+.artist-card p {
+    font-size: 0.9rem;
+    margin: 4px 0;
+    line-height: 1.4;
 }

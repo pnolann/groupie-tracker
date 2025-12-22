@@ -1,26 +1,32 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>Liste des Artistes</title>
     <link rel="stylesheet" href="/static/css/artistStyles.css">
+    <link rel="icon" href="../static/img/logo.ico">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&display=swap" rel="stylesheet">
 </head>
+
 <body>
-<div class="header">
-    <div class="title">
+    <div class="header">
+        <img src="../static/img/tigre-logo.png" class="img-logo">
         <h1>Tracker de tigres</h1>
+        <a href="/">Accueil </a>
     </div>
-    <a href="/">Accueil </a>
-</div>
-<div class="artist-container">
-    {{ range . }}
-    <div class="artist-card">
-        <img src="{{ .Image }}" alt="Image de {{ .Name }}">
-        <h2>{{ .Name }}</h2>
-        <p>Création : {{ .CreatedDate }}</p>
-        <p>Premier Album : {{ .FirstAlbum }}</p>
+    <div class="artist-container">
+        {{ range . }}
+        <div class="artist-card">
+            <img src="{{ .Image }}" alt="Image de {{ .Name }}">
+            <h2>{{ .Name }}</h2>
+            <p>Création : {{ .CreatedDate }}</p>
+            <p>Premier Album : {{ .FirstAlbum }}</p>
+        </div>
+        {{ end }}
     </div>
-    {{ end }}
-</div>
 </body>
+
 </html>
