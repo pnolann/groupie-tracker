@@ -12,6 +12,7 @@
 </head>
 
 <body>
+
     <div class="header">
         <img src="../static/img/tigre-logo.png" class="img-logo">
         <h1>Tracker de tigres</h1>
@@ -26,6 +27,11 @@
             <p>Premier Album : {{ .FirstAlbum }}</p>
         </div>
         {{ end }}
+    </div>
+
+    <div class="search-container">
+        <input type="text" id="searchInput" placeholder="Rechercher un artiste, un membre...">
+        <div id="suggestionsBox"></div>
     </div>
 </body>
 

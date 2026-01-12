@@ -1,6 +1,6 @@
-package models 
+package models
 
 type Relations struct {
-    Id int `json:"id"`
-    DatesLocations map[string][]string `json:"datesLocations"`
+	Id             int                 `json:"id"`
+	DatesLocations map[string][]string `json:"datesLocations"`
 }
