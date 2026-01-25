@@ -2,51 +2,66 @@ package handlers
 
 import (
 	"encoding/json"
-	"fmt"
 	"groupie-tracker/models"
-	"log"
 	"net/http"
+	"strings"
 )
 
-func ArtistsHandler(w http.ResponseWriter, r *http.Request) {
+type PageData struct {
+	Artists []models.Artists
+	Query   string
+}
 
-	if r.URL.Path != "/artists" {
-		http.NotFound(w, r)
+func ArtistsHandler(w http.ResponseWriter, r *http.Request) {
+	if r.Method != http.MethodGet {
+		http.Error(w, "Method not allowed", http.StatusMethodNotAllowed)
 		return
 	}
 
-	// Calls the api at the root
 	respRoot, err := http.Get("https://groupietrackers.herokuapp.com/api")
 	if err != nil {
-		log.Println("Root API error:", err)
 		http.Error(w, "Server error (API Root)", 500)
 		return
 	}
 	defer respRoot.Body.Close()
 
-	// Decoding the root response
 	var index models.ApiIndex
 	if err := json.NewDecoder(respRoot.Body).Decode(&index); err != nil {
 		http.Error(w, "Erreur décodage Index", 500)
 		return
 	}
 
-	// Calls the response
 	respArtists, err := http.Get(index.Artists)
 	if err != nil {
-		log.Println("Erreur API Artists:", err)
 		http.Error(w, "Erreur serveur (API Artists)", 500)
 		return
 	}
 	defer respArtists.Body.Close()
 
-	// Decoding the artists
-	var artists []models.Artists
-	if err := json.NewDecoder(respArtists.Body).Decode(&artists); err != nil {
-		fmt.Println("Détail de l'erreur :", err) // Affiche la raison exacte dans le terminal
+	var allArtists []models.Artists
+	if err := json.NewDecoder(respArtists.Body).Decode(&allArtists); err != nil {
 		http.Error(w, "Erreur décodage Artistes", 500)
 		return
 	}
 
-	RenderTemplate(w, "artists.html", artists)
+	query := r.URL.Query().Get("query")
+	var finalArtists []models.Artists
+
+	if query == "" {
+		finalArtists = allArtists
+	} else {
+		lowerQuery := strings.ToLower(query)
+		for _, artist := range allArtists {
+			if strings.Contains(strings.ToLower(artist.Name), lowerQuery) {
+				finalArtists = append(finalArtists, artist)
+			}
+		}
+	}
+
+	data := PageData{
+		Artists: finalArtists,
+		Query:   query,
+	}
+
+	RenderTemplate(w, "artists.html", data)
 }

@@ -31,12 +31,17 @@ body::before {
     align-items: center;
 }
 
+/* --- LE BOUTON ENCADRÉ (Style mis à jour) --- */
 .nav-link {
     color: white;
     text-decoration: none;
     font-weight: bold;
-    padding: 0.5rem 1rem;
-    border-radius: 5px;
+    font-size: 1.1rem;      /* Texte un peu plus grand */
+    padding: 0.5rem 1.5rem; /* Plus d'espace intérieur */
+    border: 3px solid white;/* La bordure blanche épaisse */
+    border-radius: 10px;    /* Coins arrondis comme sur l'image */
+    transition: all 0.2s ease;
+    display: inline-block;
 }
 
 .nav-link:hover {
@@ -44,7 +49,6 @@ body::before {
     color: #d35400;
 }
 
-/* Conteneur central */
 .container {
     flex: 1;
     display: flex;

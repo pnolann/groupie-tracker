@@ -1,26 +1,71 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <title>Liste des Artistes</title>
-    <link rel="stylesheet" href="/static/css/artistStyles.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Groupie Tracker - Liste des Artistes</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Special+Gothic+Expanded+One&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/listStyle.css">
 </head>
 <body>
-<div class="header">
-    <div class="title">
-        <h1>Tracker de tigres</h1>
-    </div>
-    <a href="/">Accueil </a>
-</div>
-<div class="artist-container">
-    {{ range . }}
-    <div class="artist-card">
-        <img src="{{ .Image }}" alt="Image de {{ .Name }}">
-        <h2>{{ .Name }}</h2>
-        <p>Création : {{ .CreatedDate }}</p>
-        <p>Premier Album : {{ .FirstAlbum }}</p>
-    </div>
-    {{ end }}
-</div>
+
+    <header class="main-header">
+        <h1>Tracker de Tigres</h1>
+        <nav>
+            <a href="/" class="nav-link">Accueil</a>
+        </nav>
+    </header>
+
+    <main class="container">
+        
+        <h2>Nos Tigres</h2>
+
+        <div class="search-container">
+            <form action="/artists" method="GET" class="search-form">
+                <input type="text" id="searchInput" name="query" placeholder="Rechercher un artiste..." value="{{ .Query }}">
+                <button type="submit">Rechercher</button>
+            </form>
+        </div>
+
+        <section class="artists-grid" id="artistsGrid">
+            {{ range .Artists }}
+            <a href="/artist?id={{ .Id }}" class="card-link">
+                <div class="artist-card">
+                    <div class="image-container">
+                        <img src="{{ .Image }}" alt="Image de {{ .Name }}">
+                    </div>
+                    <div class="card-info">
+                        <h3>{{ .Name }}</h3>
+                        <p class="meta-info">Création : {{ .CreatedDate }}</p>
+                        <p class="meta-info">1er Album : {{ .FirstAlbum }}</p>
+                    </div>
+                </div>
+            </a>
+            {{ end }}
+        </section>
+    </main>
+
+    <footer class="main-footer">
+        <p>&copy; 2026 Groupie Tracker - Projet Scolaire</p>
+    </footer>
+
+    <script>
+        document.getElementById('searchInput').addEventListener('keyup', function() {
+            let filter = this.value.toLowerCase();
+            let cards = document.querySelectorAll('.card-link');
+
+            cards.forEach(function(card) {
+                let name = card.querySelector('h3').textContent.toLowerCase();
+                if (name.includes(filter)) {
+                    card.style.display = "block";
+                } else {
+                    card.style.display = "none";
+                }
+            });
+        });
+    </script>
+
 </body>
 </html>
