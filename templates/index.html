@@ -1,27 +1,38 @@
 <!DOCTYPE html>
-<html>
-    <head><title>Groupie tracker</title>
-        <meta charset="UTF-8">
-        <meta name="descritpion" content="site web de filtres et de recherches d'artistes">
-        <link rel="stylesheet" href="../static/css/styles.css">
-    </head>
-    <body>
-        <div class="header">
-            <h1>Tracker de Tigre</h1>
-            <a href="/artists">Artistes</a>
-        </div>
-        <div class="content">
-            <h2>Bienvenue sur le tracker de tigre!</h2>
-            <p>Utilisez ce site pour rechercher et filtrer vos artistes préférés.</p>
-            <div class="search-bar">
-                <p>Barre de Recherche</p>
-            </div>
-            <div class="page-home">
-                <p>Page d'accueil</p>
-         </div>
-        </div>
-        <div class="footer">
-            <p>&copy; 2026  Groupie Tracker</p>
-        </div>
-    </body>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Special+Gothic+Expanded+One&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/indexStyles.css">
+    <title>Groupie Tracker - Accueil</title>
+</head>
+<body>
+
+    <header class="main-header">
+        <h1>Tracker de Tigres</h1>
+        <nav>
+            <a href="/artists" class="nav-link">Liste des Artistes</a>
+        </nav>
+    </header>
+
+    <main class="container">
+        <section class="hero">
+            <h2>Bienvenue sur le Tracker de Tigres</h2>
+            <p>Cherchez toutes les informations sur vos tigres favoris.</p>
+            
+            <form action="/artists" method="GET" class="search-form">
+                <input type="text" name="query" placeholder="Rechercher un tigre..." required>
+                <button type="submit">Rechercher</button>
+            </form>
+        </section>
+    </main>
+
+    <footer class="main-footer">
+        <p>&copy; 2026 Groupie Tracker - Projet Scolaire</p>
+    </footer>
+
+</body>
 </html>
