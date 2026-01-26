@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ .Name }} - Détails</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Special+Gothic+Expanded+One&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="/static/css/listStyle.css">
+    <link rel="stylesheet" href="/static/css/detailStyle.css">
+</head>
+
+<body>
+
+    <header class="main-header">
+        <h1>Fiche Tigre</h1>
+        <nav>
+            <a href="/artists" class="nav-link">Retour à la liste</a>
+        </nav>
+    </header>
+
+    <main class="container">
+
+        <div class="profile-card">
+
+            <img src="{{ .Image }}" alt="{{ .Name }}" class="profile-image">
+
+            <h2>{{ .Name }}</h2>
+
+            <div class="info-group">
+                <p><strong>Création :</strong> {{ .CreatedDate }}</p>
+                <p><strong>Premier Album :</strong> {{ .FirstAlbum }}</p>
+            </div>
+
+            <div class="info-group">
+                <h3>Membres</h3>
+                <ul style="list-style: none;">
+                    {{ range .Members }}
+                    <li>{{ . }}</li>
+                    {{ end }}
+                </ul>
+            </div>
+
+            <div class="relations-container">
+                <h3>Dates & Lieux de Concert</h3>
+                <ul class="relations-list">
+                    {{ range $loc, $dates := .RelationsData.DatesLocations }}
+                    <li>
+                        <span class="location-name">{{ $loc }}</span>
+                        <span class="date-tags">
+                            {{ range $index, $date := $dates }}
+                            {{ if $index }}, {{ end }}{{ $date }}
+                            {{ end }}
+                        </span>
+                    </li>
+                    {{ end }}
+                </ul>
+            </div>
+
+        </div>
+    </main>
+
+    <footer class="main-footer">
+        <p>&copy; 2026 Groupie Tracker - Projet Scolaire</p>
+    </footer>
+
+</body>
+
+</html>

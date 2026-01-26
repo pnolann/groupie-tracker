@@ -1,0 +1,92 @@
+/* --- Style de la carte "Profil" --- */
+.profile-card {
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 15px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+
+    /* Centrage et dimensions */
+    max-width: 800px;
+    margin: 2rem auto;
+    /* 2rem en haut/bas, auto pour centrer horizontalement */
+    padding: 3rem;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* Centre le contenu (image, titres) */
+}
+
+/* --- L'image de l'artiste --- */
+.profile-image {
+    width: 300px;
+    height: 300px;
+    object-fit: cover;
+    border-radius: 50%;
+    /* Image ronde pour changer du style carré de la liste */
+    border: 5px solid #e67e22;
+    margin-bottom: 2rem;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+/* --- Les textes --- */
+.profile-card h2 {
+    color: #d35400;
+    font-size: 3rem;
+    text-transform: uppercase;
+    margin-bottom: 0.5rem;
+    text-align: center;
+}
+
+.info-group {
+    margin-bottom: 2rem;
+    text-align: center;
+    font-size: 1.2rem;
+    color: #444;
+}
+
+/* --- Section Concerts (Relations) --- */
+.relations-container {
+    width: 100%;
+    background-color: rgba(230, 126, 34, 0.1);
+    /* Fond orange très léger */
+    padding: 2rem;
+    border-radius: 10px;
+    margin-top: 1rem;
+}
+
+.relations-container h3 {
+    color: #d35400;
+    text-align: center;
+    margin-bottom: 1.5rem;
+    font-size: 1.8rem;
+    text-decoration: underline;
+}
+
+.relations-list {
+    list-style: none;
+    padding: 0;
+}
+
+.relations-list li {
+    background: white;
+    margin-bottom: 10px;
+    padding: 15px;
+    border-radius: 8px;
+    border-left: 5px solid #e67e22;
+    /* Petite barre orange à gauche */
+    display: flex;
+    flex-direction: column;
+}
+
+.location-name {
+    font-weight: bold;
+    font-size: 1.1rem;
+    color: #333;
+    text-transform: capitalize;
+    margin-bottom: 5px;
+}
+
+.date-tags {
+    font-size: 0.95rem;
+    color: #666;
+}
