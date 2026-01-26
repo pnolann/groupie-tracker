@@ -10,5 +10,8 @@ type Artists struct {
 
 	Locations    string `json:"locations"`
 	ConcertDates string `json:"concertDates"`
-	Relations    string `json:"relations"`
+
+	Relations string `json:"relations"`
+
+	RelationsData Relations `json:"-"`
 }
