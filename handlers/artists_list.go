@@ -15,33 +15,33 @@ type PageData struct {
 
 func ArtistsHandler(w http.ResponseWriter, r *http.Request) {
 	if r.Method != http.MethodGet {
-		http.Error(w, "Method not allowed", http.StatusMethodNotAllowed)
+		ErrorHandler(w, http.StatusMethodNotAllowed, "Méthode non autorisée.")
 		return
 	}
 
 	respRoot, err := http.Get("https://groupietrackers.herokuapp.com/api")
 	if err != nil {
-		http.Error(w, "Server error (API Root)", 500)
+		ErrorHandler(w, http.StatusInternalServerError, "Impossible de contacter l'API Groupie Trackers (Root).")
 		return
 	}
 	defer respRoot.Body.Close()
 
 	var index models.ApiIndex
 	if err := json.NewDecoder(respRoot.Body).Decode(&index); err != nil {
-		http.Error(w, "Erreur décodage Index", 500)
+		ErrorHandler(w, http.StatusInternalServerError, "Erreur lors de la lecture de l'index API.")
 		return
 	}
 
 	respArtists, err := http.Get(index.Artists)
 	if err != nil {
-		http.Error(w, "Erreur serveur (API Artists)", 500)
+		ErrorHandler(w, http.StatusInternalServerError, "Impossible de récupérer la liste des artistes.")
 		return
 	}
 	defer respArtists.Body.Close()
 
 	var allArtists []models.Artists
 	if err := json.NewDecoder(respArtists.Body).Decode(&allArtists); err != nil {
-		http.Error(w, "Erreur décodage Artistes", 500)
+		ErrorHandler(w, http.StatusInternalServerError, "Erreur lors du décodage des données artistes.")
 		return
 	}
 
@@ -58,15 +58,15 @@ func ArtistsHandler(w http.ResponseWriter, r *http.Request) {
 		}
 
 		if minDateStr != "" {
-			min, _ := strconv.Atoi(minDateStr)
-			if artist.CreatedDate < min {
+			min, err := strconv.Atoi(minDateStr)
+			if err == nil && artist.CreatedDate < min {
 				continue
 			}
 		}
 
 		if maxDateStr != "" {
-			max, _ := strconv.Atoi(maxDateStr)
-			if artist.CreatedDate > max {
+			max, err := strconv.Atoi(maxDateStr)
+			if err == nil && artist.CreatedDate > max {
 				continue
 			}
 		}

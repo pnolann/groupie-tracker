@@ -6,7 +6,7 @@ import (
 
 func HomeHandler(w http.ResponseWriter, r *http.Request) {
 	if r.URL.Path != "/" {
-		http.NotFound(w, r)
+		ErrorHandler(w, http.StatusNotFound, "La page que vous cherchez semble avoir été dévorée par un tigre.")
 		return
 	}
 
