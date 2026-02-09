@@ -23,9 +23,35 @@
         <h2>Nos Tigres</h2>
 
         <div class="search-container">
-            <form action="/artists" method="GET" class="search-form">
-                <input type="text" id="searchInput" name="query" placeholder="Rechercher un artiste..." value="{{ .Query }}">
-                <button type="submit">Rechercher</button>
+            <form action="/artists" method="GET" class="filter-form">
+                <div class="search-bar">
+                    <input type="text" name="query" placeholder="Rechercher un artiste..." value="{{ .Query }}">
+                    <button type="submit">Rechercher / Filtrer</button>
+                </div>
+
+                <div class="filters">
+                    <div class="filter-group">
+                        <span class="filter-label">Année de création :</span>
+                        <div class="date-inputs">
+                            <input type="number" name="minDate" placeholder="Min (ex: 1990)" min="1950" max="2026">
+                            <input type="number" name="maxDate" placeholder="Max (ex: 2026)" min="1950" max="2026">
+                        </div>
+                    </div>
+
+                    <div class="filter-group">
+                        <span class="filter-label">Nombre de membres :</span>
+                        <div class="checkboxes">
+                            <label><input type="checkbox" name="members" value="1"> 1</label>
+                            <label><input type="checkbox" name="members" value="2"> 2</label>
+                            <label><input type="checkbox" name="members" value="3"> 3</label>
+                            <label><input type="checkbox" name="members" value="4"> 4</label>
+                            <label><input type="checkbox" name="members" value="5"> 5</label>
+                            <label><input type="checkbox" name="members" value="6"> 6</label>
+                            <label><input type="checkbox" name="members" value="7"> 7</label>
+                            <label><input type="checkbox" name="members" value="8"> 8+</label>
+                        </div>
+                    </div>
+                </div>
             </form>
         </div>
 
@@ -40,6 +66,7 @@
                         <h3>{{ .Name }}</h3>
                         <p class="meta-info">Création : {{ .CreatedDate }}</p>
                         <p class="meta-info">1er Album : {{ .FirstAlbum }}</p>
+                        <p class="meta-info">Membres : {{ len .Members }}</p>
                     </div>
                 </div>
             </a>
@@ -50,22 +77,6 @@
     <footer class="main-footer">
         <p>&copy; 2026 Groupie Tracker - Projet Scolaire</p>
     </footer>
-
-    <script>
-        document.getElementById('searchInput').addEventListener('keyup', function() {
-            let filter = this.value.toLowerCase();
-            let cards = document.querySelectorAll('.card-link');
-
-            cards.forEach(function(card) {
-                let name = card.querySelector('h3').textContent.toLowerCase();
-                if (name.includes(filter)) {
-                    card.style.display = "block";
-                } else {
-                    card.style.display = "none";
-                }
-            });
-        });
-    </script>
 
 </body>
 </html>

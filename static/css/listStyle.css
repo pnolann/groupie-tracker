@@ -77,33 +77,34 @@ body::before {
 
 .search-container {
     width: 100%;
-    max-width: 600px;
+    max-width: 800px;
     margin-bottom: 2rem;
+    background: rgba(255, 255, 255, 0.95);
+    padding: 1.5rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
 }
 
-.search-form {
+.filter-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.search-bar {
     display: flex;
     gap: 10px;
 }
 
-.search-form input {
+.search-bar input {
     flex: 1;
     padding: 0.8rem 1.2rem;
     font-size: 1rem;
-    border: 2px solid rgba(255, 255, 255, 0.5);
+    border: 2px solid #ddd;
     border-radius: 8px;
-    background: rgba(255, 255, 255, 0.9);
-    outline: none;
-    transition: all 0.3s ease;
 }
 
-.search-form input:focus {
-    background: white;
-    border-color: #e67e22;
-    box-shadow: 0 0 10px rgba(230, 126, 34, 0.5);
-}
-
-.search-form button {
+.search-bar button {
     padding: 0.8rem 1.5rem;
     font-size: 1rem;
     font-weight: bold;
@@ -112,11 +113,63 @@ body::before {
     border: none;
     border-radius: 8px;
     cursor: pointer;
-    transition: background 0.3s ease;
 }
 
-.search-form button:hover {
+.search-bar button:hover {
     background-color: #d35400;
+}
+
+.filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    border-top: 1px solid #eee;
+    padding-top: 1rem;
+}
+
+.filter-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.filter-label {
+    font-weight: bold;
+    color: #d35400;
+}
+
+.date-inputs {
+    display: flex;
+    gap: 10px;
+}
+
+.date-inputs input {
+    padding: 0.5rem;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    width: 100px;
+}
+
+.checkboxes {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.checkboxes label {
+    background: #f0f0f0;
+    padding: 5px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.checkboxes label:hover {
+    background: #e67e22;
+    color: white;
 }
 
 .artists-grid {

@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"groupie-tracker/models"
 	"net/http"
+	"strconv"
 	"strings"
 )
 
@@ -45,17 +46,46 @@ func ArtistsHandler(w http.ResponseWriter, r *http.Request) {
 	}
 
 	query := r.URL.Query().Get("query")
+	minDateStr := r.URL.Query().Get("minDate")
+	maxDateStr := r.URL.Query().Get("maxDate")
+	members := r.URL.Query()["members"]
+
 	var finalArtists []models.Artists
 
-	if query == "" {
-		finalArtists = allArtists
-	} else {
-		lowerQuery := strings.ToLower(query)
-		for _, artist := range allArtists {
-			if strings.Contains(strings.ToLower(artist.Name), lowerQuery) {
-				finalArtists = append(finalArtists, artist)
+	for _, artist := range allArtists {
+		if query != "" && !strings.Contains(strings.ToLower(artist.Name), strings.ToLower(query)) {
+			continue
+		}
+
+		if minDateStr != "" {
+			min, _ := strconv.Atoi(minDateStr)
+			if artist.CreatedDate < min {
+				continue
 			}
 		}
+
+		if maxDateStr != "" {
+			max, _ := strconv.Atoi(maxDateStr)
+			if artist.CreatedDate > max {
+				continue
+			}
+		}
+
+		if len(members) > 0 {
+			keep := false
+			nb := strconv.Itoa(len(artist.Members))
+			for _, m := range members {
+				if m == nb {
+					keep = true
+					break
+				}
+			}
+			if !keep {
+				continue
+			}
+		}
+
+		finalArtists = append(finalArtists, artist)
 	}
 
 	data := PageData{
