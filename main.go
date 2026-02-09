@@ -15,6 +15,7 @@ func main() {
 	// Routes
 	http.HandleFunc("/", handlers.HomeHandler)
 	http.HandleFunc("/artists", handlers.ArtistsHandler)
+	http.HandleFunc("/artist", handlers.ArtistDetailHandler)
 
 	fmt.Println("Server is running on http://localhost:8080")
 	log.Fatal(http.ListenAndServe(":8080", nil))
