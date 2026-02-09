@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ .Artist.Name }} - Détails</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Special+Gothic+Expanded+One&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
+    
+    <link rel="stylesheet" href="/static/css/listStyle.css">
+    <link rel="stylesheet" href="/static/css/detailStyle.css"> </head>
+<body>
+
+    <header class="main-header">
+        <h1>Tracker de Tigres</h1>
+        <nav>
+            <a href="/" class="nav-link">Accueil</a>
+            <a href="/artists" class="nav-link">Retour à la liste</a>
+        </nav>
+    </header>
+
+    <main class="container detail-container">
+        
+        <section class="profile-header">
+            <div class="profile-image">
+                <img src="{{ .Artist.Image }}" alt="{{ .Artist.Name }}">
+            </div>
+            <div class="profile-info">
+                <h2>{{ .Artist.Name }}</h2>
+                <div class="badges">
+                    <span class="badge">Création : {{ .Artist.CreatedDate }}</span>
+                    <span class="badge">1er Album : {{ .Artist.FirstAlbum }}</span>
+                </div>
+                
+                <div class="members-section">
+                    <h3>Membres</h3>
+                    <ul class="members-list">
+                        {{ range .Artist.Members }}
+                        <li>{{ . }}</li>
+                        {{ end }}
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section class="map-section">
+            <h3>Tournée Mondiale</h3>
+            <p>Retrouvez les positions des concerts sur la carte.</p>
+            <div id="map"></div>
+        </section>
+
+        <section class="dates-list">
+            <h3>Détail des dates par lieu</h3>
+            <div class="locations-grid">
+                {{ range $loc, $dates := .Relations.DatesLocations }}
+                <div class="location-card">
+                    <h4 class="location-name">{{ $loc }}</h4>
+                    <ul>
+                        {{ range $dates }}
+                        <li>{{ . }}</li>
+                        {{ end }}
+                    </ul>
+                </div>
+                {{ end }}
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="main-footer">
+        <p>&copy; 2026 Groupie Tracker - Projet Scolaire</p>
+    </footer>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+    
+    <script>
+        var map = L.map('map').setView([20, 0], 2); 
+
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 19,
+            attribution: '© OpenStreetMap'
+        }).addTo(map);
+
+    
+        var locations = [
+            {{ range $loc, $dates := .Relations.DatesLocations }}
+            "{{ $loc }}",
+            {{ end }}
+        ];
+
+        function cleanLocationName(loc) {
+            return loc.replace(/_/g, ' ').replace('-', ', ');
+        }
+
+        
+        locations.forEach(function(locRaw) {
+            var query = cleanLocationName(locRaw);
+            
+            fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(query)}`)
+                .then(response => response.json())
+                .then(data => {
+                    if (data && data.length > 0) {
+                        var lat = data[0].lat;
+                        var lon = data[0].lon;
+                        
+                        var marker = L.marker([lat, lon]).addTo(map);
+                        marker.bindPopup(`<b>${query.toUpperCase()}</b>`);
+                    }
+                })
+                .catch(err => console.error("Erreur géocodage pour " + query, err));
+        });
+    </script>
+
+</body>
+</html>

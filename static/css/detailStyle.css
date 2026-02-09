@@ -1,0 +1,140 @@
+.detail-container {
+    max-width: 1000px;
+    width: 95%;
+    gap: 2rem;
+}
+
+.profile-header {
+    display: flex;
+    flex-wrap: wrap;
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    width: 100%;
+}
+
+.profile-image {
+    flex: 1;
+    min-width: 300px;
+    min-height: 300px;
+}
+
+.profile-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.profile-info {
+    flex: 1.5;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.profile-info h2 {
+    font-size: 3rem;
+    color: #d35400; 
+    margin-bottom: 1rem;
+    text-transform: uppercase;
+}
+
+.badges {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
+}
+
+.badge {
+    background: #333;
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    font-weight: bold;
+}
+
+.members-section h3 {
+    margin-bottom: 0.5rem;
+    color: #555;
+}
+
+.members-list {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.members-list li {
+    background: #eee;
+    padding: 5px 10px;
+    border-radius: 4px;
+    font-size: 0.9rem;
+}
+
+.map-section {
+    width: 100%;
+    background: rgba(255, 255, 255, 0.95);
+    padding: 1.5rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    text-align: center;
+}
+
+.map-section h3 {
+    color: #d35400;
+    margin-bottom: 1rem;
+    font-size: 1.8rem;
+}
+
+#map {
+    height: 400px; 
+    width: 100%;
+    border-radius: 8px;
+    border: 2px solid #ddd;
+    z-index: 1; 
+}
+
+.dates-list {
+    width: 100%;
+}
+
+.dates-list h3 {
+    color: white;
+    background-color: rgba(230, 126, 34, 0.9);
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+    display: inline-block;
+}
+
+.locations-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 1rem;
+}
+
+.location-card {
+    background: rgba(255, 255, 255, 0.9);
+    padding: 1rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.location-name {
+    color: #d35400;
+    text-transform: capitalize; 
+    margin-bottom: 0.5rem;
+    border-bottom: 2px solid #eee;
+    padding-bottom: 0.2rem;
+}
+
+.location-card ul {
+    list-style: none;
+    font-size: 0.85rem;
+    color: #444;
+}
